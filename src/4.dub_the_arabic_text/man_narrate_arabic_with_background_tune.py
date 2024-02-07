@@ -8,13 +8,19 @@ def generate_audio(text, output_file):
 
 def overlay_audio(voice_file, output_file, background_file):
     background_audio = AudioSegment.from_file(background_file)
-    voice_audio = AudioSegment.from_file(voice_file)
-    # Adjust the amplitude of the voice narration
-    voice_audio = voice_audio + (voice_audio - voice_audio.dBFS) * 3
+    # Load the audio clip
+    voice_audio = AudioSegment.from_file(voice_file, format="mp3")
+    # Define the volume factor (1.0 is the original volume, values greater than 1 increase the volume)
+    volume_factor = 10 # Increase the volume by 50%
+    # Adjust the volume of the audio clip
+    increased_volume_clip = voice_audio + volume_factor
     # Overlay the voice narration on the background tune
-    output_audio = background_audio.overlay(voice_audio, position=0)
+    output_audio = increased_volume_clip.overlay(background_audio, position=0)
     # Export the final audio
     output_audio.export(output_file, format="mp3")
+
+
+
 
 def narrate_files(input_folder, output_folder, background_music_path, speed=1.1):
     # Check if the output folder exists, if not, create it
@@ -42,7 +48,7 @@ def narrate_files(input_folder, output_folder, background_music_path, speed=1.1)
 if __name__ == "__main__":
     input_folder = 'D:\\video_summary\\processing\\arabic_transcripts' 
     output_folder = 'D:\\video_summary\\processing\\arabic_narrators'
-    background_music_path = "D:\\video_summary\\processing\\background_audios\\separation.mp3"
+    background_music_path = "D:\\video_summary\\processing\\background_audios\\Sailing.mp3"
     speed = 1.1
 
     narrate_files(input_folder, output_folder,background_music_path, speed)    

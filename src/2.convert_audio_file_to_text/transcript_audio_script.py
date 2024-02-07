@@ -14,6 +14,7 @@ nltk.download('punkt')
 processing_folder = 'D:\\video_summary\\processing'
 extracted_audio_folder = processing_folder+'\\audio_extracted'
 segmented_audio_folder = processing_folder+'\\audio_segmented'
+transcript_folder_path = processing_folder + "\\Transcripts" 
 filenameDir = ""
 
 def createFolder(file_name):
@@ -86,16 +87,17 @@ def transcribe_audio(audio_file):
             print(f"Could not request results from Google Speech Recognition service; {e}")
 
 
-def splitAudios():
+def splitAudios(folder_name):
 # Iterate over files in the folder
-    for filenameEx in os.listdir(extracted_audio_folder):
+    Cus_extracted_audio_folder = extracted_audio_folder + folder_name
+    for filenameEx in os.listdir(Cus_extracted_audio_folder):
         splitted_folder_file_path=""
         if filenameEx.endswith('.wav') or filenameEx.endswith('.flac'):
             # Spliting Audio .... 1 ....Spliting Audio
-            audio_file = os.path.join(extracted_audio_folder, filenameEx)
+            audio_file = os.path.join(Cus_extracted_audio_folder, filenameEx)
             filenameDir =filenameEx.split(".wav")[0]
             # Specify the path for the new folder
-            splitted_folder_file_path = segmented_audio_folder + "\\" + filenameDir   
+            splitted_folder_file_path = segmented_audio_folder + folder_name +"\\"+ filenameDir   
             # Use os.makedirs() to create the splitted audio folder and its parents if they don't exist
             if not os.path.exists(splitted_folder_file_path):
                 os.makedirs(splitted_folder_file_path, exist_ok=True)
@@ -103,24 +105,31 @@ def splitAudios():
             split_audio(audio_file,  splitted_folder_file_path)
             print(f"Audio_file '{audio_file}' Splitted successfully.")
 
-def createTranscripts():
+
+def createTranscripts(folder_name):
         # Create a folder to hold all transcripts texts files
-        transcript_folder_path = processing_folder + "\\" + "Transcripts"
+        Cus_segmented_audio_folder = segmented_audio_folder + folder_name
+        Cus_transcript_folder_path= transcript_folder_path + folder_name
         # Use os.makedirs() to create the folder and its parents if they don't exist
-        if not os.path.exists(transcript_folder_path):
-            os.makedirs(transcript_folder_path, exist_ok=True)
-            print(f"----- transcript_folder_path '{transcript_folder_path}' created successfully.") 
+        if not os.path.exists(Cus_transcript_folder_path):
+            os.makedirs(Cus_transcript_folder_path, exist_ok=True)
+            print(f"----- transcript_folder_path '{Cus_transcript_folder_path}' created successfully.") 
         # String variable containing text    
         text_content=""
-        for splitted_folder_file_path in get_subfolders(segmented_audio_folder):
+        transcript_file_path = ""
+        transcript_file_name = ""
+        for splitted_folder_file_path in get_subfolders(Cus_segmented_audio_folder):
+            print("--- splitted_folder_file_path ",splitted_folder_file_path)
+            transcript_file_name = splitted_folder_file_path.split("\\")[-1]
+            print("--- transcript_file_name ",transcript_file_name)
+            transcript_file_path = transcript_folder_path + folder_name+ "\\"+transcript_file_name+".txt"
+            print("--- transcript_file_path ",transcript_file_path)
             # Iterate over the segmented audio files to create a transcript called text_content
             for seg_filename in os.listdir(splitted_folder_file_path):
                 if seg_filename.endswith('.wav') or seg_filename.endswith('.flac'):
                     seg_audio_file_path = os.path.join(splitted_folder_file_path, seg_filename)
                     text = transcribe_audio(seg_audio_file_path)
-                                # Create a transcript text file to store the transcript called text_content
-                    transcript_file_name = seg_filename+".txt"
-                    transcript_file_path = transcript_folder_path + "\\" + transcript_file_name
+                    # Create a transcript text file to store the transcript called text_content
                     if text:
                         text_content += text 
             # Summarize the article
@@ -131,4 +140,4 @@ def createTranscripts():
                 file.write(text_content)
             print("---- Text content saved to summary text file:", transcript_file_path)
 
-createTranscripts()            
+createTranscripts("\\personal")            
