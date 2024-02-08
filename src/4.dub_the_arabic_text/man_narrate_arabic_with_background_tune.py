@@ -46,9 +46,9 @@ def narrate_files(input_folder, output_folder, background_music_path, speed=1.1)
 
 
 if __name__ == "__main__":
-    input_folder = 'D:\\video_summary\\processing\\arabic_transcripts' 
-    output_folder = 'D:\\video_summary\\processing\\arabic_narrators'
+    input_folder = 'D:\\video_summary\\processing\\Transcripts\\Cutseries_film_sumarized_translated' 
+    output_folder = 'D:\\video_summary\\processing\\arabic_narrators\\Cutseries_film_narrated'
     background_music_path = "D:\\video_summary\\processing\\background_audios\\Sailing.mp3"
-    speed = 1.1
+    speed = 1.2
 
     narrate_files(input_folder, output_folder,background_music_path, speed)    

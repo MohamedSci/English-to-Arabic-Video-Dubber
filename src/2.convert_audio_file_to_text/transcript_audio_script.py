@@ -115,10 +115,13 @@ def createTranscripts(folder_name):
             os.makedirs(Cus_transcript_folder_path, exist_ok=True)
             print(f"----- transcript_folder_path '{Cus_transcript_folder_path}' created successfully.") 
         # String variable containing text    
-        text_content=""
-        transcript_file_path = ""
-        transcript_file_name = ""
+        
+        
+        
         for splitted_folder_file_path in get_subfolders(Cus_segmented_audio_folder):
+            text_content=""
+            transcript_file_name = ""
+            transcript_file_path = ""
             print("--- splitted_folder_file_path ",splitted_folder_file_path)
             transcript_file_name = splitted_folder_file_path.split("\\")[-1]
             print("--- transcript_file_name ",transcript_file_name)
