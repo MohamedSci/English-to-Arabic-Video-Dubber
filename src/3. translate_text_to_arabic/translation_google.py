@@ -70,9 +70,8 @@ def translate_folder(input_folder, output_folder):
             output_file = os.path.join(output_folder, file_name)
             translate_file(input_file, output_file)
 
-
 if __name__ == "__main__":
-    input_folder = 'D:\\video_summary\\processing\\Transcripts'
-    output_folder = 'D:\\video_summary\\processing\\arabic_transcripts'
+    input_folder = 'D:\\video_summary\\processing\\Transcripts\\personal'
+    output_folder = 'D:\\video_summary\\processing\\arabic_transcripts\\personal'
     translate_folder(input_folder, output_folder)
     print("All translations complete.")

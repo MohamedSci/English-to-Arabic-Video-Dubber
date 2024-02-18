@@ -46,10 +46,9 @@ def process_video(vID,video_path, new_audio_path, output_folder):
     video_clip.close()
 
 
-
-input_audio_folder = 'D:\\video_summary\\processing\\arabic_narrators\\Cutseries_film_narrated999'
-input_video_folder = 'D:\\video_summary\\videos\\Cutseries_film'
-output_folder = 'D:\\video_summary\\videos\\dubbed_videos\\Cutseries_film\\new1'
+input_audio_folder = "D:\\video_summary\Dating\\arabic_transcripts"
+input_video_folder = 'D:\\video_summary\\videos\\personal_videos'
+output_folder = 'D:\\video_summary\\videos\\dubbed_videos\\personal'
 
 def main():
     audio_files_list= os.listdir(input_audio_folder)

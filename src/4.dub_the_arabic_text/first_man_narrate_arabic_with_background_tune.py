@@ -1,38 +1,15 @@
-import os
 from gtts import gTTS
 from pydub import AudioSegment
-from pydub.utils import mediainfo
-
+import os
 
 def generate_audio(text, output_file):
     tts = gTTS(text=text, lang='ar')
     tts.save(output_file)
 
-
-def get_audio_duration(file_path):
-    info = mediainfo(file_path)
-    duration_ms = float(info['duration']) * 1000  # Convert seconds to milliseconds
-    return duration_ms
-
-
-def adjust_audio_speed(audio_file_path):
-    audio_clip_duration = get_audio_duration(audio_file_path)
-    if audio_clip_duration > 190000:  # 3 minutes and 10 seconds in milliseconds
-        speed_factor = round(audio_clip_duration / 190000, 1)
-        audio = AudioSegment.from_file(audio_file_path, format="mp3")
-        adjusted_audio = audio.speedup(playback_speed=speed_factor)      
-    else:
-        audio = AudioSegment.from_file(audio_file_path, format="mp3")
-        adjusted_audio = audio.speedup(playback_speed=1.2)
-    return adjusted_audio    
-
-
-
-
 def overlay_audio(voice_file, output_file, background_file):
     background_audio = AudioSegment.from_file(background_file)
     # Load the audio clip
-    voice_audio = adjust_audio_speed(voice_file)
+    voice_audio = AudioSegment.from_file(voice_file, format="mp3")
     # Define the volume factor (1.0 is the original volume, values greater than 1 increase the volume)
     volume_factor = 10 # Increase the volume by 50%
     # Adjust the volume of the audio clip
@@ -67,10 +44,12 @@ def narrate_files(input_folder, output_folder, background_music_path, speed=1.1)
             os.remove(voice_file)
             print(f"Narration completed for {filename}")
 
+
+
 if __name__ == "__main__":
+    input_folder = "D:\\video_summary\\processing\\Transcripts\\personal_translated"
+    output_folder = 'D:\\video_summary\Dating\\arabic_narrators'
     background_music_path = "D:\\video_summary\\processing\\background_audios\\Sailing.mp3"
     speed = 1.2
-    input_folder = "D:\\video_summary\\processing\\Transcripts\\personal_tests\\scripts"
-    output_folder = "D:\\video_summary\\processing\\Transcripts\\personal_tests\\narrated"
-    background_music_path = "D:\\video_summary\\processing\\background_audios\\end-of-a-day.mp3"
+
     narrate_files(input_folder, output_folder,background_music_path, speed)    
