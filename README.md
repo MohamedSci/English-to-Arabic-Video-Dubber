@@ -29,6 +29,8 @@ git clone https://github.com/<your_username>/english_to_arabic_video_dubber.git
    Create a requirements.txt file with the following content:
 
    ```
+   youtube_dl
+   sumy
    pydub
    moviepy
    googletrans
