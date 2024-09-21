@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 set "input_folder=D:\video_summary\videos\personal_videos"
-set "output_folder=D:\\video_summary\\processing\\audio_extracted\\personal_videos_audios_extracted"
+set "output_folder=D:\video_summary\processing\\audio_extracted\\personal_videos_audios_extracted"
 
 for %%i in ("%input_folder%\*.mp4") do (
     set "output_file=!output_folder!\%%~ni.wav"
