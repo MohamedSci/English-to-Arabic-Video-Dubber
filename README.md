@@ -71,3 +71,7 @@ python main.py --input_video "my_english_video.mp4" --output_video "arabic_dubbe
 
 This project is under development. Feel free to contribute by creating pull requests!
 
+
+## [Buy me a Coffee☕](<https://ko-fi.com/mohamedsaidibrahim>)
+
+If you enjoy this content and want to support me, feel free to [buy me a coffee](<https://ko-fi.com/mohamedsaidibrahim>)
