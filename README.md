@@ -21,7 +21,7 @@ This Python project automatically dubs English videos into Arabic videos.
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/<your_username>/english_to_arabic_video_dubber.git
+git clone https://github.com/MohamedSci/English-to-Arabic-Video-Dubber.git
 ```
 
 2. Install required libraries:
